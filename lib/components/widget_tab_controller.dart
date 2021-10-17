@@ -87,7 +87,7 @@ class MyTabBarView extends StatelessWidget {
         ),
         RefreshIndicator(
           onRefresh: () {
-            articleBloc.add(ArticlesLoadEvent());
+            articleBloc.add(ArticlesCheckEvent());
             return Future.delayed(const Duration(seconds: 1), () {});
           },
           child: BlocBuilder<ArticlesBloc, ArticlesState>(
