@@ -8,12 +8,16 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
   ArticlesBloc({
     required this.articlesRepository,
     required this.articlesRepositoryEverything,
-  }) : super(ArticlesEmptyState());
+  }) : super(ArticlesEmptyState()) {
+    add(ArticlesLoadEvent());
+  }
   final ArticlesRepository articlesRepository;
   final ArticlesRepositoryEverything articlesRepositoryEverything;
 
   @override
   Stream<ArticlesState> mapEventToState(ArticlesEvent event) async* {
+    ArticlesLoadedState articlesLoadedState =
+        ArticlesLoadedState(loadedArticles: [], loadedArticlesEverything: []);
     if (event is ArticlesLoadEvent) {
       yield ArticlesLoadingState();
       try {
@@ -21,10 +25,28 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
             await articlesRepository.getArticles();
         final List<Article> _loadArticleListOfEverything =
             await articlesRepositoryEverything.getArticles();
-        yield ArticlesLoadedState(
+        articlesLoadedState = ArticlesLoadedState(
           loadedArticles: _loadArticleList,
           loadedArticlesEverything: _loadArticleListOfEverything,
         );
+        yield articlesLoadedState;
+      } catch (_) {
+        yield ArticlesErrorState();
+      }
+    }
+    if (event is ArticlesCheckEvent) {
+      try {
+        final List<Article> _loadArticleList =
+            await articlesRepository.getArticles();
+        final List<Article> _loadArticleListOfEverything =
+            await articlesRepositoryEverything.getArticles();
+        if (_loadArticleList != articlesLoadedState.loadedArticles) {
+          articlesLoadedState = ArticlesLoadedState(
+            loadedArticles: _loadArticleList,
+            loadedArticlesEverything: _loadArticleListOfEverything,
+          );
+          yield articlesLoadedState;
+        }
       } catch (_) {
         yield ArticlesErrorState();
       }
