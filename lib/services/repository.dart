@@ -3,12 +3,24 @@ import 'package:test_task/services/api.dart';
 
 class ArticlesRepository {
   final ApiService _articlesProvider =
-      ApiService(endPointTopic: '/v2/top-headlines', keyWord: 'apple');
-  Future<List<Article>> getArticles() => _articlesProvider.getArticle();
+      ApiService(endPointTopic: '/v2/top-headlines');
+  Future<List<Article>> getArticles({
+    required String keyWord,
+    required String page,
+    required String pageSize,
+  }) =>
+      _articlesProvider.getArticle(
+          keyWord: keyWord, page: page, pageSize: pageSize);
 }
 
 class ArticlesRepositoryEverything {
   final ApiService _articlesProvider =
-      ApiService(endPointTopic: '/v2/everything', keyWord: 'apple');
-  Future<List<Article>> getArticles() => _articlesProvider.getArticle();
+      ApiService(endPointTopic: '/v2/everything');
+  Future<List<Article>> getArticles({
+    required String keyWord,
+    required String page,
+    required String pageSize,
+  }) =>
+      _articlesProvider.getArticle(
+          keyWord: keyWord, page: page, pageSize: pageSize);
 }

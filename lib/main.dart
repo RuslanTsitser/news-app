@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_task/bloc/article_bloc.dart';
-import 'package:test_task/bloc/article_event.dart';
 import 'package:test_task/bloc/article_state.dart';
 import 'package:test_task/services/repository.dart';
 

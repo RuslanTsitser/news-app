@@ -17,29 +17,16 @@ class ArticlePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            article.urlToImage != null
-                ? Container(
-                    height: 200.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(article.urlToImage),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                  )
-                : Container(
-                    height: 200.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              'https://source.unsplash.com/weekly?coding'),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                  ),
-            SizedBox(
+            Container(
+              height: 200.0,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(article.urlToImage), fit: BoxFit.cover),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+            ),
+            const SizedBox(
               height: 8.0,
             ),
             Container(
@@ -50,21 +37,21 @@ class ArticlePage extends StatelessWidget {
               ),
               child: Text(
                 article.source.name ?? 'Unknown',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
             Text(
               article.description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16.0,
               ),
-            )
+            ),
           ],
         ),
       ),

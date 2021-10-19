@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_task/model/article_model.dart';
-import 'package:test_task/pages/details_news.dart';
+import 'package:test_task/components/widget_page_details_of_news.dart';
 
 Widget customListTile(Article article, BuildContext context) {
   return InkWell(
