@@ -25,14 +25,23 @@ class TabHeadlines extends StatelessWidget {
         } else if (state is ArticlesLoadedState) {
           return ListView.builder(
             itemCount: state.loadedArticles.length,
-            itemBuilder: (context, index) =>
-                customListTile(state.loadedArticles[index], context),
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: customListTile(
+                    state.loadedArticles[index], articleBloc, context),
+                onLongPress: () {
+                  articleBloc.add(ArticlesUpdateFavoriteEvent(
+                    article: state.loadedArticles[index],
+                  ));
+                },
+              );
+            },
           );
         } else if (state is ArticlesErrorState) {
           return const Center(child: Text("Something wrong"));
         }
         Timer.periodic(const Duration(seconds: 5),
-            (Timer t) => articleBloc.add(ArticlesCheckEvent()));
+            (Timer t) => articleBloc.add(ArticlesCheckHeadlinesEvent()));
         return const Center(child: CircularProgressIndicator());
       },
     );

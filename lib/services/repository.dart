@@ -24,3 +24,7 @@ class ArticlesRepositoryEverything {
       _articlesProvider.getArticle(
           keyWord: keyWord, page: page, pageSize: pageSize);
 }
+
+class ArticlesRepositoryFavorite {
+  Set<Article> favorites = {};
+}

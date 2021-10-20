@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_task/bloc/article_bloc.dart';
+import 'package:test_task/components/widget_page_favorites.dart';
 import 'package:test_task/components/widget_tab_everything.dart';
 import 'package:test_task/components/widget_tab_headlines.dart';
 
@@ -18,6 +19,16 @@ class _MyTabControllerState extends State<MyTabController> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => FavoritesPage(
+                      favoriteArticles: articleBloc.repositoryFavoriteArticles,
+                      articlesBloc: articleBloc,
+                    )),
+          );
+        }),
         appBar: AppBar(
           bottom: const TabBar(
             tabs: [

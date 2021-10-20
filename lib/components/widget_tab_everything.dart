@@ -17,7 +17,7 @@ class TabEverything extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () {
-        articleBloc.add(ArticlesCheckEvent());
+        articleBloc.add(ArticlesCheckEverythingEvent());
         return Future.delayed(const Duration(seconds: 1), () {});
       },
       child: BlocBuilder<ArticlesBloc, ArticlesState>(
@@ -28,8 +28,19 @@ class TabEverything extends StatelessWidget {
           if (state is ArticlesLoadedState) {
             return ListView.builder(
               itemCount: state.loadedArticlesEverything.length,
-              itemBuilder: (context, index) => customListTile(
-                  state.loadedArticlesEverything[index], context),
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: customListTile(state.loadedArticlesEverything[index],
+                      articleBloc, context),
+                  onLongPress: () {
+                    articleBloc.add(
+                      ArticlesUpdateFavoriteEvent(
+                        article: state.loadedArticlesEverything[index],
+                      ),
+                    );
+                  },
+                );
+              },
             );
           }
           return const Center(child: CircularProgressIndicator());

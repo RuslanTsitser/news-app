@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_task/bloc/article_bloc.dart';
+import 'package:test_task/bloc/article_event.dart';
 import 'package:test_task/model/article_model.dart';
 import 'package:test_task/components/widget_page_details_of_news.dart';
 
-Widget customListTile(Article article, BuildContext context) {
+Widget customListTile(
+    Article article, ArticlesBloc articlesBloc, BuildContext context) {
   return InkWell(
+    onLongPress: () {
+      articlesBloc.add(ArticlesUpdateFavoriteEvent(
+        article: article,
+      ));
+    },
     onTap: () {
       Navigator.push(
         context,
@@ -31,18 +40,26 @@ Widget customListTile(Article article, BuildContext context) {
             ),
           ),
           const SizedBox(height: 8.0),
-          Container(
-            padding: const EdgeInsets.all(6.0),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            child: Text(
-              article.source.name ?? 'Unknown',
-              style: const TextStyle(
-                color: Colors.white,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(6.0),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: Text(
+                  article.source.name ?? 'Unknown',
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
-            ),
+              articlesBloc.repositoryFavoriteArticles.contains(article)
+                  ? const Icon(Icons.star)
+                  : const Icon(Icons.star_border),
+            ],
           ),
           const SizedBox(height: 8.0),
           Text(
@@ -51,7 +68,8 @@ Widget customListTile(Article article, BuildContext context) {
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
             ),
-          )
+          ),
+          const SizedBox(height: 8.0),
         ],
       ),
     ),

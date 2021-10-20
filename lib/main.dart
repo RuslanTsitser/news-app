@@ -33,10 +33,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final articlesRepository = ArticlesRepository();
     final articlesRepositoryEverything = ArticlesRepositoryEverything();
+    final articlesRepositoryFavorite = ArticlesRepositoryFavorite();
     return BlocProvider<ArticlesBloc>(
       create: (context) => ArticlesBloc(
         articlesRepository: articlesRepository,
         articlesRepositoryEverything: articlesRepositoryEverything,
+        articlesRepositoryFavorite: articlesRepositoryFavorite,
       ),
       child: const MyTabController(),
     );

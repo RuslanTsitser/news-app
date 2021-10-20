@@ -9,6 +9,7 @@ class Article {
   String urlToImage;
   String publishedAt;
   String content;
+
   Article({
     required this.source,
     required this.author,
