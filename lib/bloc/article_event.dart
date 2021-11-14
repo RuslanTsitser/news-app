@@ -1,10 +1,21 @@
-abstract class ArticlesEvent {}
+import 'package:equatable/equatable.dart';
 
-class ArticlesLoadEvent extends ArticlesEvent {}
+abstract class ArticlesEvent extends Equatable {}
 
-class ArticlesCheckEverythingEvent extends ArticlesEvent {}
+class ArticlesLoadEvent extends ArticlesEvent {
+  @override
+  List<Object?> get props => [];
+}
 
-class ArticlesCheckHeadlinesEvent extends ArticlesEvent {}
+class ArticlesCheckEverythingEvent extends ArticlesEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class ArticlesCheckHeadlinesEvent extends ArticlesEvent {
+  @override
+  List<Object?> get props => [];
+}
 
 class ArticlesUpdateFavoriteEvent extends ArticlesEvent {
   final dynamic article;
@@ -12,4 +23,7 @@ class ArticlesUpdateFavoriteEvent extends ArticlesEvent {
   ArticlesUpdateFavoriteEvent({
     required this.article,
   });
+
+  @override
+  List<Object?> get props => [article];
 }

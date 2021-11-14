@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import 'source_model.dart';
 
-class Article {
+class Article extends Equatable {
   Source source;
   String author;
   String title;
@@ -33,4 +35,7 @@ class Article {
       content: json['content'] ?? 'null',
     );
   }
+
+  @override
+  List<Object?> get props => [source, author];
 }

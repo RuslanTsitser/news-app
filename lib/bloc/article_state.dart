@@ -1,8 +1,16 @@
-abstract class ArticlesState {}
+import 'package:equatable/equatable.dart';
 
-class ArticlesLoadingState extends ArticlesState {}
+abstract class ArticlesState extends Equatable {}
 
-class ArticlesEmptyState extends ArticlesState {}
+class ArticlesLoadingState extends ArticlesState {
+  @override
+  List<Object?> get props => [];
+}
+
+class ArticlesEmptyState extends ArticlesState {
+  @override
+  List<Object?> get props => [];
+}
 
 class ArticlesLoadedState extends ArticlesState {
   List<dynamic> loadedArticles;
@@ -14,6 +22,13 @@ class ArticlesLoadedState extends ArticlesState {
     required this.loadedArticlesEverything,
     required this.favoriteArticles,
   });
+
+  @override
+  List<Object?> get props =>
+      [loadedArticles, loadedArticlesEverything, favoriteArticles];
 }
 
-class ArticlesErrorState extends ArticlesState {}
+class ArticlesErrorState extends ArticlesState {
+  @override
+  List<Object?> get props => [];
+}
