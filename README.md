@@ -1,16 +1,22 @@
-# test_task
+# News app
 
-A new Flutter project.
+A simple app for reading news. 
+You can read them mode detailed.
+You can mark some news as favourites.
 
-## Getting Started
+## Stack
 
-This project is a starting point for a Flutter application.
+- RestAPI
+- BloC
+- API newsapi.org
 
-A few resources to get you started if this is your first Flutter project:
+### Packages
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- flutter_bloc - for the state management
+- equatable - for defining identical objects
+- http - for interactions with the server
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Example
+
+https://user-images.githubusercontent.com/50975460/150639886-be9eb217-a3b2-48ab-8c62-ff4a550d234d.MOV
+
